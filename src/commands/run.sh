@@ -7,11 +7,11 @@ get_default_containers() {
 }
 
 run_containers () {
-    docker-compose up $(get_default_containers)
+    docker compose up $(get_default_containers)
 }
 
 run_containers_silent () {
-    docker-compose up -d $(get_default_containers)
+    docker compose up -d $(get_default_containers)
 }
 
 run_command () {

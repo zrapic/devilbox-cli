@@ -316,7 +316,7 @@ set_readable_config () {
 
 is_running () {
     local all
-    all=$(docker-compose ps 2> /dev/null | grep "devilbox" | grep -v "devilbox_bind" | awk '{print $3}' | grep "Up")
+    all=$(docker compose ps 2> /dev/null | grep "devilbox" | grep -v "devilbox_bind" | awk '{print $4}' | grep "running")
     if was_success; then
         return "$OK_CODE";
     else
@@ -419,7 +419,7 @@ exec_command() {
         return "$KO_CODE"
     fi
 
-    docker-compose exec -u devilbox php bash -c "$@"
+    docker compose exec -u devilbox php bash -c "$@"
 }
 
 add_usage_command () {
@@ -522,11 +522,11 @@ get_default_containers() {
 }
 
 run_containers () {
-    docker-compose up $(get_default_containers)
+    docker compose up $(get_default_containers)
 }
 
 run_containers_silent () {
-    docker-compose up -d $(get_default_containers)
+    docker compose up -d $(get_default_containers)
 }
 
 run_command () {
@@ -550,8 +550,8 @@ stop_command () {
         error "Devilbox containers are not running"
         return "$KO_CODE"
     fi
-    docker-compose stop
-    docker-compose rm -f
+    docker compose stop
+    docker compose rm -f
 }
 
 get_recent_devilbox_versions () {
